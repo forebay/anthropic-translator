@@ -24,7 +24,7 @@
   "ignoredHighlightLanguages": [
     "mermaid"
   ],
-  "sourceLinkTemplate": "https://github.com/intisy-ai/anthropic-translator/blob/{gitRevision}/{path}#L{line}",
+  "sourceLinkTemplate": "https://github.com/forebay/anthropic-translator/blob/{gitRevision}/{path}#L{line}",
   "tsconfig": "./tsconfig.json",
   "intentionallyNotExported": [
     "__module"

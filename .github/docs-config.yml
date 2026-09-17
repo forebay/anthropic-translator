@@ -1,5 +1,5 @@
 kind: generic
-description: Anthropic wire-format translator for the intisy-ai AI-proxy ecosystem.
+description: Anthropic wire-format translator for the forebay AI-proxy ecosystem.
 badges:
   - npm-version
   - npm-downloads

@@ -65,7 +65,7 @@ npm install @intisy-ai/anthropic-translator
 Java, as a `github-gradle` coordinate resolving this repo's released `:anthropic` jar:
 
 ```groovy
-githubImplementation "intisy-ai:anthropic-translator:1.1.0:anthropic"
+githubImplementation "forebay:anthropic-translator:1.1.0:anthropic"
 ```
 
 No checkout of this repo or of `core-ir` is needed, or wanted: a nested checkout is a third

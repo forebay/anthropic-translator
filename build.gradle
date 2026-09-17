@@ -80,7 +80,7 @@ configure(subprojects.findAll { PUBLISHED_MODULES.containsKey(it.path) }) {
     publishGithub {
         // These modules sit inside this repo with no .git of their own, so the default git-remote
         // lookup fails; owner/repo also drive the uploaded asset name (anthropic-translator-<classifier>.jar).
-        owner = "intisy-ai"
+        owner = "forebay"
         repo = "anthropic-translator"
         releaseName = "anthropic-translator ${project.findProperty('artifact_version') ?: project.version}"
         artifacts {

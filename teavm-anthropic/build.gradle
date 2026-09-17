@@ -8,7 +8,7 @@ plugins {
 dependencies {
     // teavm transpiles :ir's + :anthropic's pure types -- no gson/net/nio/etc, matching their own
     // zero-dependency policy.
-    githubImplementation "intisy-ai:basekit:5.0.0:ir"
+    githubImplementation "forebay:basekit:5.0.0:ir"
     implementation project(":anthropic")
     // SOURCE-retention, so nothing here reaches the bundle. The processor jar is a release asset and
     // carries no transitive metadata, so the annotation types it reads are named beside it.
