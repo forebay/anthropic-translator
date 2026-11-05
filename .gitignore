@@ -10,4 +10,3 @@ graphify-out/
 # Generated on the default branch by the release readme job.
 README.md
 site/
-package-lock.json

@@ -14,8 +14,6 @@
   },
   "highlightLanguages": [
     "bash",
-    "groovy",
-    "java",
     "js",
     "json",
     "ts",

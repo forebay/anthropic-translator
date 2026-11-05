@@ -80,7 +80,9 @@ describe("anthropic translator vectors", () => {
   });
 
   it.each(vectors)("%s", async (_name, vector) => {
-    expect(await runVector(vector)).toEqual(expectedOf(vector));
+    const actual = await runVector(vector);
+    expect(actual).toEqual(expectedOf(vector));
+    if (vector.direction.startsWith("encode")) expect(JSON.stringify(actual)).toBe(JSON.stringify(vector.output));
   });
 });
 
