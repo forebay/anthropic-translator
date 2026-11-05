@@ -8,6 +8,9 @@ interface ExtensionOwner {
 
 const NEUTRAL_KEY_PREFIX = "$";
 
+/** Where a front door leaves the headers of the client request on an IR request, for a provider to send on; the `$` prefix keeps it out of the encoded body. */
+export const WIRE_HEADERS_EXTENSION = `${NEUTRAL_KEY_PREFIX}wireHeaders`;
+
 export function putExtension(owner: ExtensionOwner, key: string, value: unknown): void {
   owner.extensions ??= {};
   owner.extensions[key] = value;

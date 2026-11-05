@@ -2,7 +2,7 @@ import type { IrRequest, IrResponse, IrStreamEvent } from "@forebay/host";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { anthropicTranslator } from "./index.js";
+import { anthropicTranslator, WIRE_HEADERS_EXTENSION } from "./index.js";
 
 interface Vector {
   direction: string;
@@ -134,5 +134,25 @@ describe("anthropic translator malformed input", () => {
     const stream = anthropicTranslator.encodeStream();
     const unknownEvent = { event: "surprise" } as unknown as IrStreamEvent;
     return expect(collect(stream, [unknownEvent])).rejects.toThrow(/unsupported/);
+  });
+});
+
+describe("the wire headers extension", () => {
+  const request: IrRequest = {
+    model: "claude-x",
+    messages: [],
+    stream: false,
+    extensions: { [WIRE_HEADERS_EXTENSION]: { "anthropic-beta": "client-beta", "x-app": "cli" }, "custom_field": 1 },
+  };
+
+  it("is named $wireHeaders", () => {
+    expect(WIRE_HEADERS_EXTENSION).toBe("$wireHeaders");
+  });
+
+  it("never reaches the encoded body, while another extension still does", () => {
+    const body = JSON.stringify(anthropicTranslator.encodeRequest(request));
+    expect(body).not.toContain("wireHeaders");
+    expect(body).not.toContain("client-beta");
+    expect(JSON.parse(body)).toMatchObject({ custom_field: 1 });
   });
 });
