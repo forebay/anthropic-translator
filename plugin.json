@@ -1,12 +1,6 @@
 {
-  "$schema": "./node_modules/@intisy/bayonet/schema/plugin.schema.json",
   "id": "anthropic-translator",
   "api": 1,
-  "publish": {
-    "jarModule": [
-      "anthropic"
-    ]
-  },
   "repo": {
     "role": "Anthropic wire-format translator",
     "category": "vendor-translator",
@@ -14,8 +8,7 @@
       "anthropic"
     ],
     "tech": [
-      "java",
-      "teavm"
+      "typescript"
     ]
   }
 }

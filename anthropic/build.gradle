@@ -1,6 +1,0 @@
-// Anthropic translator + codecs. Zero-dependency, Java-8-clean (TeaVM-transpilable), mirroring
-// basekit's :ir. Depends on :ir for the Translator interface + IR types.
-dependencies {
-    githubImplementation "forebay:basekit:5.0.0:ir"
-    githubTestImplementation "forebay:basekit:5.0.0:ir-test-fixtures"
-}

@@ -1,20 +1,13 @@
 node_modules/
 dist/
-
-# java/ (Gradle + TeaVM module)
-**/build/
-.gradle/
-**/.gradle/
-*.iml
-
-# TeaVM-generated JS, staged by build:teavm -- the .d.ts alongside it is hand-authored and committed
-src/generated/*.js
-src/generated/*.js.map
-docs/
-.superpowers/
-graphify-out/
+siblings/
 .idea/
+*.log
+.superpowers/
+docs/
+graphify-out/
 
 # Generated on the default branch by the release readme job.
 README.md
 site/
+package-lock.json
