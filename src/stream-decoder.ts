@@ -101,6 +101,15 @@ function decodeError(frame: JsonObject): IrStreamEvent {
   return event;
 }
 
+/** @implNote A line cut short by a dropped connection is not JSON, and yields nothing just as a frame of an unknown type does. */
+function frameOf(payload: string): JsonObject | null {
+  try {
+    return asMap(JSON.parse(payload));
+  } catch {
+    return null;
+  }
+}
+
 export class AnthropicStreamDecoder {
   private readonly frames = new SseFrameBuffer();
 
@@ -108,8 +117,12 @@ export class AnthropicStreamDecoder {
     return this.frames.push(chunk).flatMap((payload) => this.decodePayload(payload));
   }
 
+  flush(): IrStreamEvent[] {
+    return this.frames.flush().flatMap((payload) => this.decodePayload(payload));
+  }
+
   private decodePayload(payload: string): IrStreamEvent[] {
-    const frame = asMap(JSON.parse(payload));
+    const frame = frameOf(payload);
     const type = frame === null ? null : asString(frame.type);
     const decoder = type === null ? undefined : FRAME_DECODERS[type];
     const event = frame !== null && decoder !== undefined ? decoder(frame) : null;
@@ -122,6 +135,9 @@ export function createDecodeStream(): TransformStream<string, IrStreamEvent> {
   return new TransformStream({
     transform(chunk, controller) {
       for (const event of decoder.decode(chunk)) controller.enqueue(event);
+    },
+    flush(controller) {
+      for (const event of decoder.flush()) controller.enqueue(event);
     },
   });
 }

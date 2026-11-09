@@ -121,6 +121,23 @@ describe("anthropic translator streaming", () => {
   });
 });
 
+describe("anthropic translator stream edges", () => {
+  const stop = 'data: {"type":"content_block_stop","index":0}';
+
+  it("decodes a last frame that has no terminating blank line", async () => {
+    expect(await collect(anthropicTranslator.decodeStream(), [`${stop}\n`])).toEqual([{ event: "content_block_stop", index: 0 }]);
+  });
+
+  it("decodes a last line that has no newline at all", async () => {
+    expect(await collect(anthropicTranslator.decodeStream(), [stop])).toEqual([{ event: "content_block_stop", index: 0 }]);
+  });
+
+  it("carries on past a data line that is not JSON", async () => {
+    const events = await collect(anthropicTranslator.decodeStream(), [`${stop}\n\ndata: {"type":"mess\n\n${stop}\n\n`]);
+    expect(events).toEqual([{ event: "content_block_stop", index: 0 }, { event: "content_block_stop", index: 0 }]);
+  });
+});
+
 describe("anthropic translator malformed input", () => {
   it("decodes a request that is not an object to an empty request", () => {
     expect(anthropicTranslator.decodeRequest("nope")).toEqual({ model: "", messages: [], stream: false });

@@ -17,6 +17,15 @@ export class SseFrameBuffer {
     return payloads;
   }
 
+  /** What the end of the stream completes: a last line with no newline, and a last frame with no blank line after it. */
+  flush(): string[] {
+    const payloads: string[] = [];
+    this.acceptLine(this.pending.replace(/\r$/, ""), payloads);
+    this.pending = "";
+    this.endFrame(payloads);
+    return payloads;
+  }
+
   private acceptLine(line: string, payloads: string[]): void {
     if (line === "") {
       this.endFrame(payloads);
