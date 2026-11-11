@@ -1,0 +1,35 @@
+{
+  "format": 1,
+  "importName": "anthropic-translator",
+  "description": "Converts Anthropic's wire format to and from the neutral message format.",
+  "topics": [
+    "ai",
+    "ai-proxy",
+    "anthropic",
+    "forebay",
+    "java",
+    "llm",
+    "teavm",
+    "translator",
+    "vendor-translator"
+  ],
+  "dependencies": [
+    {
+      "id": "github:1443361890",
+      "importName": "host",
+      "commit": "ab55d183d61cfbbc4ff12f02ddd5b4c39b8cf542"
+    },
+    {
+      "id": "github:1427176225",
+      "importName": "model",
+      "commit": "606988fb178b04d3f53835e6d982c09f31081ef1",
+      "path": "siblings/host/siblings/model"
+    },
+    {
+      "id": "github:1427561829",
+      "importName": "typescript",
+      "commit": "46bf872abbfcfe164294a9b3daa40fa0c26fff77",
+      "path": "siblings/host/siblings/typescript"
+    }
+  ]
+}
